@@ -165,10 +165,11 @@ export default function InputPanel({
                 <tr key={i}>
                   <td className="py-1 pr-2">
                     <input
-                      type="month"
+                      type="text"
                       value={b.month}
                       onChange={(e) => updateRow(i, "month", e.target.value)}
-                      className="w-[130px] rounded-lg border border-white/10 bg-black/30 px-2 py-1.5 text-[13.5px] tabular-nums text-white outline-none focus:border-cyan-400/50"
+                      placeholder="2025-11"
+                      className="w-[110px] rounded-lg border border-white/10 bg-black/30 px-2 py-1.5 text-[13.5px] tabular-nums text-white outline-none placeholder:text-white/25 focus:border-cyan-400/50"
                     />
                   </td>
                   {(["electricity", "water", "gas"] as const).map((k) => (
