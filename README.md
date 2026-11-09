@@ -7,6 +7,26 @@
 - 隐私友好:所有计算在浏览器本地完成,**无数据库**,配置仅存 localStorage
 - 可扩展:规则全部数据化(档位/单价/周期/账单频率),高级设置中可改价格适配其他城市;新增城市只需在 `src/core/rules/` 增加一个 RuleSet
 
+## 界面预览
+
+**① 录入账单** —— 手动 / CSV·Excel 上传 / 粘贴文本,自动识别表头;只填金额,用量与跳档自动反推
+<p align="center"><img src="docs/screenshots/01-input.png" alt="录入账单" width="92%"></p>
+
+**② 总览与趋势** —— 支出结构、三资源金额与反推用量,空调峰与地暖峰一目了然
+<p align="center"><img src="docs/screenshots/02-dashboard.png" alt="总览与趋势" width="92%"></p>
+
+**③ 阶梯跳档地图** —— 每个结算周期一行,格子颜色 = 当月档位,▲ = 跨档月,虚线 = 按近期用量预测
+<p align="center"><img src="docs/screenshots/03-tiers.png" alt="阶梯跳档地图" width="92%"></p>
+
+**④ 档位进度与一户多人口价值** —— 累计用量落在哪一档;申请与未申请的费用对比与节省金额
+<p align="center"><img src="docs/screenshots/04-savings.png" alt="档位进度与价值测算" width="92%"></p>
+
+**⑤ 总结建议** —— 规则式结论即时生成,可选 AI 深度分析;右上「导出报告」支持 HTML / Markdown
+<p align="center"><img src="docs/screenshots/05-insights.png" alt="总结建议与导出" width="92%"></p>
+
+**导出的 HTML 报告** —— 单文件自包含(图表、明细表、建议、口径附录),浏览器打开即可、可打印为 PDF
+<p align="center"><img src="docs/screenshots/06-report.png" alt="HTML 分析报告" width="620"></p>
+
 ## 快速开始
 
 ```bash
