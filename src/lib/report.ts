@@ -328,6 +328,27 @@ export function buildReportHtml(input: ReportInput): string {
   .rpt-md th { background: #f5f6f8; }
   .rpt-md blockquote { border-left: 3px solid #059669; background: #ecfdf5; margin: .8em 0; padding: .6em 1em; border-radius: 0 8px 8px 0; }
   .rpt-md ul, .rpt-md ol { padding-left: 1.4em; }
+  .rpt-md { overflow-x: auto; }
+  .rpt-table { min-width: 480px; }
+  /* 窄屏/手机:泳道改纵向堆叠,防止行头日期与右侧统计溢出;表格横向滚动兜底 */
+  @media (max-width: 760px) {
+    body { font-size: 13.5px; }
+    .rpt-page { padding: 18px 10px 36px; }
+    .rpt-header { padding: 20px 18px; border-radius: 12px; }
+    .rpt-header h1 { font-size: 21px; }
+    .rpt-card { padding: 14px 12px; border-radius: 12px; overflow-x: auto; }
+    .rpt-kpis { grid-template-columns: 1fr 1fr; gap: 8px; }
+    .rpt-kpi b { font-size: 19px; }
+    .rpt-lane { display: block; margin-bottom: 12px; }
+    .rpt-lane-head { width: auto; display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin-bottom: 4px; }
+    .rpt-lane-head b { font-size: 12.5px; }
+    .rpt-lane-head span { font-size: 11px; }
+    .rpt-cells { gap: 3px; }
+    .rpt-cell { height: 26px; font-size: 10px; border-radius: 5px; overflow: hidden; white-space: nowrap; }
+    .rpt-lane-sum { width: auto; margin-top: 4px; text-align: left; }
+    .rpt-progress-row { grid-template-columns: 1fr; row-gap: 3px; }
+    .rpt-progress-right { text-align: left; }
+  }
   .rpt-footer { margin-top: 20px; padding-top: 12px; border-top: 1px solid #e5e8ec; font-size: 11.5px; color: #9ca3af; display: flex; justify-content: space-between; }
   @media print {
     body { background: #fff; }
