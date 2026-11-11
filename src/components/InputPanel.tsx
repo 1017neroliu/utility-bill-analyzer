@@ -109,6 +109,16 @@ export default function InputPanel({
     onBills(next);
   };
 
+  const addMonthRow = (dir: 1 | -1) => {
+    if (dir === 1) {
+      const last = bills[bills.length - 1];
+      onBills([...bills, { month: last ? shiftMonth(last.month, 1) : "2026-01" }]);
+    } else {
+      const first = bills[0];
+      onBills([{ month: first ? shiftMonth(first.month, -1) : currentMonth() }, ...bills]);
+    }
+  };
+
   const tabs: { id: Tab; label: string; icon: typeof Table2 }[] = [
     { id: "manual", label: "手动输入", icon: Table2 },
     { id: "upload", label: "上传 CSV / Excel", icon: Upload },
@@ -197,16 +207,22 @@ export default function InputPanel({
               ))}
             </tbody>
           </table>
-          <button
-            onClick={() => {
-              const last = bills[bills.length - 1];
-              const nextMonth = last ? nextMonthOf(last.month) : "2026-01";
-              onBills([...bills, { month: nextMonth }]);
-            }}
-            className="mt-2 flex items-center gap-1.5 rounded-lg border border-dashed border-white/15 px-3 py-1.5 text-[13px] text-white/50 transition-colors hover:border-white/30 hover:text-white/80"
-          >
-            <Plus className="h-4 w-4" /> 添加一个月
-          </button>
+          <div className="mt-2 flex flex-wrap gap-2">
+            <button
+              onClick={() => addMonthRow(1)}
+              className="flex items-center gap-1.5 rounded-lg border border-dashed border-white/15 px-3 py-1.5 text-[13px] text-white/50 transition-colors hover:border-white/30 hover:text-white/80"
+              title="在表格末尾追加下一个月(取最后一行的下一个月)"
+            >
+              <Plus className="h-4 w-4" /> 添加一个月
+            </button>
+            <button
+              onClick={() => addMonthRow(-1)}
+              className="flex items-center gap-1.5 rounded-lg border border-dashed border-white/15 px-3 py-1.5 text-[13px] text-white/50 transition-colors hover:border-white/30 hover:text-white/80"
+              title="在表格最前面插入上一个月(取第一行的上一个月,可连续点击逐月往前补录)"
+            >
+              <Plus className="h-4 w-4" /> 添加上一个月
+            </button>
+          </div>
         </div>
       )}
 
@@ -292,9 +308,14 @@ export default function InputPanel({
   );
 }
 
-function nextMonthOf(month: string): string {
+function shiftMonth(month: string, delta: number): string {
   const m = /^(\d{4})-(\d{2})$/.exec(month);
   if (!m) return "2026-01";
-  const total = Number(m[1]) * 12 + Number(m[2]);
+  const total = Number(m[1]) * 12 + (Number(m[2]) - 1) + delta;
   return `${Math.floor(total / 12)}-${String((total % 12) + 1).padStart(2, "0")}`;
+}
+
+function currentMonth(): string {
+  const now = new Date();
+  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
 }
